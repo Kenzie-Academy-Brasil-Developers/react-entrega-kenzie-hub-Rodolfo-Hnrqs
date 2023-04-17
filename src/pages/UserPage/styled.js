@@ -4,6 +4,14 @@ export const StyledUserPage = styled.div`
     width: 100%; 
     max-width: 770px;
     
+    .loading > h3{
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        color: white;
+        font-weight: 600;
+        font-size: 1.125rem;
+    }
 
     .warningDiv{
         display: flex;

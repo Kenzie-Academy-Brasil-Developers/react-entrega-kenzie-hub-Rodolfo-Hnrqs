@@ -2,14 +2,18 @@ import Logo from "../../assets/Logo.svg"
 import { Link } from "react-router-dom"
 import { StyledButtonNav, StyledNav } from "./styled"
 import { toast } from "react-toastify"
+import { useContext } from "react"
+import { UserContext } from "../../providers/userContext"
 
-export const Nav = ({ userLogout, button }) => {
+export const Nav = ({ button }) => {
+    const { userLogout, user } = useContext(UserContext)
+
     return (
         <>
             {button ?
                 (<StyledButtonNav>
                     <img src={Logo} alt="Logo KenzieHub" />
-                    {userLogout ?
+                    {user ?
                         (<button onClick={() => {
                             userLogout()
                             toast.success("Fez logout com sucesso!")

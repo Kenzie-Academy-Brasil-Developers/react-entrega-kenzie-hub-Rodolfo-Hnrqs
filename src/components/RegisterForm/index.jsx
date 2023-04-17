@@ -3,12 +3,10 @@ import { Input } from "../fragments/Input"
 import { Select } from "../fragments/Select"
 import { registerFormSchema } from "./registerFormSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { api } from "../../services/api"
-import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { StyledRegisterForm } from "./styled"
-
+import { UserContext } from "../../providers/userContext"
+import { useNavigate } from "react-router-dom"
 
 export const RegisterForm = () => {
     const [loading, setLoading] = useState(false)
@@ -16,23 +14,14 @@ export const RegisterForm = () => {
         resolver: zodResolver(registerFormSchema)
     })
 
-    const navigate = useNavigate();
+    const { userRegister } = useContext(UserContext)
 
-    const userRegister = async (formData) => {
-        try {
-            setLoading(true)
-            const response = await api.post("/users", formData)
-            toast.success("Cadastro realizado com sucesso!")
-            navigate("/")
-        } catch (error) {
-            toast.error("Ops! Algo deu errado!")
-        } finally{
-            setLoading(false)
-        }
-    }
+    const navigate = useNavigate()
 
     const submit = (formData) => (
-        userRegister(formData)
+        userRegister(formData, setLoading, () => {
+            navigate("/")
+        })
     )
     
     return(
