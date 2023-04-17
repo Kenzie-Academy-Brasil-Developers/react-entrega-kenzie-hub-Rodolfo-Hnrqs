@@ -24,6 +24,7 @@ export const TechList = () => {
                 {user.techs.map((tech) => {
                     return <TechCard key={tech.title} tech={tech}/>
                 })}
+                <TechCard/>
             </StyledTechList>
         </>
     )
