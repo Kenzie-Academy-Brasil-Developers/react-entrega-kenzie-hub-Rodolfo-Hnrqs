@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { UserContext } from "./userContext";
 
-export const TechContext = createContext({});
+export const TechContext = createContext({})
 
 export const TechProvider = ({ children }) => {
     const { user } = useContext(UserContext)
